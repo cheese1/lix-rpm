@@ -1,9 +1,8 @@
-%global debug_package %{nil}
 %global forgeurl https://github.com/SimonN/LixD/
 
 Name:           lix
 Version:        0.10.7
-Release:        0.3%{?dist}
+Release:        0.4%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
 # CC0-1.0 for everything, expect "Bitstream Vera and Public Domain" for dejavu-sans fonts
@@ -84,6 +83,9 @@ rm -rf %{buildroot}
 %{_datadir}/lix/music
 
 %changelog
+* Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.4
+- generate debuginfo packages
+
 * Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.3
 - recommended music subpackage
 - remove duplicated svg icon (3,6MB)
@@ -92,5 +94,5 @@ rm -rf %{buildroot}
 - local (offline) dub dependencies
 
 * Sat Mar 25 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.1
-- initial package (loosely based on the SUSE version by Martin Hauke)
+- initial package (loosely based on the SUSE version)
 
