@@ -3,7 +3,7 @@
 
 Name:           lix
 Version:        0.10.7
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
 # CC0-1.0 for exerything, expect "Bitstream Vera and Public Domain" for dejavu-sans fonts and CC-BY-4.0 for Rubix's music
@@ -12,11 +12,14 @@ URL:            https://www.lixgame.com/
 # Add -i -v for detailed information
 %forgemeta
 Source:         %{forgesource}
+Source1:        lix-dub-deps-local-0.10-20230402.tar.xz
 # TODO: Add music source
 BuildRequires:  ldc dub
 BuildRequires:  pkgconf-pkg-config
-BuildRequires:   enet-devel
+BuildRequires:  enet-devel
 BuildRequires:  allegro5-devel allegro5-addon-acodec-devel allegro5-addon-audio-devel allegro5-addon-image-devel allegro5-addon-ttf-devel
+# dub uses git client to determine version of dependencies in local cache
+BuildRequires:  git
 
 # Deps:
 # pobrać tagi z gita dla projektów (binarki ze zmianą katalogu z dub-repo są ok, ale tagi są bardziej wiarygodne
@@ -34,10 +37,15 @@ Attack and defend in real-time multiplayer for 2 to 8 players: Who can save the 
 
 %prep
 %setup -q -n LixD-%{version}
+tar xJf %{SOURCE1}
 
 %build
 export DFLAGS="%{_d_optflags}"
-dub build -f -b releaseXDG
+export DUB_DEPS_LOCAL_PATH=$(pwd)/dub-deps-local
+dub add-path "$DUB_DEPS_LOCAL_PATH"
+dub build --nodeps  --cache=local -f -b releaseXDG
+dub remove-path "$DUB_DEPS_LOCAL_PATH"
+#dub clean-caches
 
 %install
 install -Dm 0755 bin/%{name} %{buildroot}%{_bindir}/%{name}
@@ -68,6 +76,9 @@ rm -rf %{buildroot}
 %{_mandir}/man6/lix.6*
 
 %changelog
+* Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.2
+- local (offline) dub dependencies
+
 * Sat Mar 25 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.1
-- initial package
+- initial package (loosely based on the SUSE version by Martin Hauke)
 
