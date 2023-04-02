@@ -30,6 +30,7 @@ Assign skills to guide the lix through over 700 singleplayer puzzles.
 Design your own levels with the included editor.
 Attack and defend in real-time multiplayer for 2 to 8 players: Who can save the most lix?
 
+
 %package music
 Summary: Music for Lix - a single and multiplaer puzzle game inspired by Lemmings
 # CC0-1.0 for menulix.ogg and minim-mobius/, CC-BY-4.0 for rubix/
@@ -50,22 +51,19 @@ export DUB_DEPS_LOCAL_PATH=$(pwd)/dub-deps-local
 dub add-path "$DUB_DEPS_LOCAL_PATH"
 dub build --nodeps  --cache=local -f -b releaseXDG
 dub remove-path "$DUB_DEPS_LOCAL_PATH"
+# Needed?
 #dub clean-caches
 
 %install
 install -Dm 0755 bin/%{name} %{buildroot}%{_bindir}/%{name}
 install -d %{buildroot}%{_datadir}/%{name}
-#TODO: can system fonts be used?
+# TODO: can system font be used?
 cp -ar data/ images/ levels/ %{buildroot}%{_datadir}/%{name}
 cp -ar music/ %{buildroot}%{_datadir}/%{name}
 install -Dm 0644 doc/lix.6 %{buildroot}%{_mandir}/man6/lix.6
-#TODO: Needs to be duplicated?
-install -Dm 0644 data/images/lix_logo.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 install -Dm 0644 data/images/lix_logo.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/com.lixgame.Lix.svg
 install -Dm 0644 data/desktop/com.lixgame.Lix.metainfo.xml %{buildroot}%{_datadir}/metainfo/com.lixgame.Lix-metainfo.xml
 install -Dm 0644 data/desktop/com.lixgame.Lix.desktop %{buildroot}%{_datadir}/applications/com.lixgame.Lix.desktop
-# TODO: Separate package for music
-#cp -ar music/%{buildroot}%{_datadir}/%{name}
 
 %clean
 rm -rf %{buildroot}
@@ -77,7 +75,6 @@ rm -rf %{buildroot}
 %{_datadir}/lix/data
 %{_datadir}/lix/images
 %{_datadir}/lix/levels
-%{_datadir}/icons/hicolor/scalable/apps/lix.svg
 %{_datadir}/icons/hicolor/scalable/apps/com.lixgame.Lix.svg
 %{_datadir}/applications/com.lixgame.Lix.desktop
 %{_datadir}/metainfo/com.lixgame.Lix-metainfo.xml
@@ -89,6 +86,7 @@ rm -rf %{buildroot}
 %changelog
 * Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.3
 - recommended music subpackage
+- remove duplicated svg icon (3,6MB)
 
 * Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.2
 - local (offline) dub dependencies
