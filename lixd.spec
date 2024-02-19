@@ -1,8 +1,8 @@
 %global forgeurl https://github.com/SimonN/LixD/
 
 Name:           lix
-Version:        0.10.7
-Release:        0.5%{?dist}
+Version:        0.10.12
+Release:        0.1%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
 # CC0-1.0 for everything, expect "Bitstream Vera and Public Domain" for dejavu-sans fonts
@@ -11,8 +11,9 @@ URL:            https://www.lixgame.com/
 # Add -i -v for detailed information
 %forgemeta
 Source:         %{forgesource}
+# TODO: Provide instruction how to locally build that "deps cache"
 Source1:        lix-dub-deps-local-0.10-20230402.tar.xz
-# TODO: Add explicit versioning - https://github.com/SimonN/LixD/issues/457
+# TODO: In fact version 1.1 - add explicit versioning, if provided upstream - https://github.com/SimonN/LixD/issues/457
 Source2:        https://www.lixgame.com/dow/lix-music.zip
 BuildRequires:  ldc dub
 BuildRequires:  pkgconf-pkg-config
@@ -81,6 +82,10 @@ install -Dm 0644 data/desktop/com.lixgame.Lix.desktop %{buildroot}%{_datadir}/ap
 %{_datadir}/lix/music
 
 %changelog
+* Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.12-0.1
+- upgrade to 0.10.12
+- use updated lix-music 1.1 package (still using the same URL - see discussion in https://github.com/SimonN/LixD/issues/457)
+
 * Sun Apr 02 2023 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.7-0.5
 - improve version rule for "Recommends"
 - remove superfluous "clean" section (as suggested by linter)
