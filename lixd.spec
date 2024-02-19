@@ -12,7 +12,7 @@ URL:            https://www.lixgame.com/
 %forgemeta
 Source:         %{forgesource}
 Source1:        lix-dub-deps-local-0.10-20230402.tar.xz
-# TODO: Add explicit versioning
+# TODO: Add explicit versioning - https://github.com/SimonN/LixD/issues/457
 Source2:        https://www.lixgame.com/dow/lix-music.zip
 BuildRequires:  ldc dub
 BuildRequires:  pkgconf-pkg-config
@@ -48,6 +48,7 @@ unzip %{SOURCE2}
 export DFLAGS="%{_d_optflags}"
 export DUB_DEPS_LOCAL_PATH=$(pwd)/dub-deps-local
 dub add-path "$DUB_DEPS_LOCAL_PATH"
+# TODO: Run unit-tests?
 dub build --nodeps  --cache=local -f -b releaseXDG
 dub remove-path "$DUB_DEPS_LOCAL_PATH"
 # Needed?
