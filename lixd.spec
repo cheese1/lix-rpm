@@ -1,7 +1,7 @@
 %global forgeurl https://github.com/SimonN/LixD/
 
 Name:           lix
-Version:        0.10.12
+Version:        0.10.20
 Release:        0.1%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
@@ -12,7 +12,7 @@ URL:            https://www.lixgame.com/
 %forgemeta
 Source:         %{forgesource}
 # TODO: Provide instruction how to locally build that "deps cache"
-Source1:        lix-dub-deps-local-0.10-20230402.tar.xz
+Source1:        lix-dub-deps-local-0.10-20240219.tar.xz
 # TODO: In fact version 1.1 - add explicit versioning, if provided upstream - https://github.com/SimonN/LixD/issues/457
 Source2:        https://www.lixgame.com/dow/lix-music.zip
 BuildRequires:  ldc dub
@@ -32,9 +32,10 @@ Attack and defend in real-time multiplayer for 2 to 8 players: Who can save the 
 
 
 %package music
-Summary: Music for Lix - a single and multiplaer puzzle game inspired by Lemmings
+Summary:        Music for Lix - a single and multiplaer puzzle game inspired by Lemmings
 # CC0-1.0 for menulix.ogg and minim-mobius/, CC-BY-4.0 for rubix/
-License: CC0-1.0 AND CC-BY-4.0
+License:        CC0-1.0 AND CC-BY-4.0
+BuildArch:      noarch
 
 %description music
 Music for Lix - a single and multiplaer puzzle game inspired by Lemmings.
@@ -50,7 +51,7 @@ export DFLAGS="%{_d_optflags}"
 export DUB_DEPS_LOCAL_PATH=$(pwd)/dub-deps-local
 dub add-path "$DUB_DEPS_LOCAL_PATH"
 # TODO: Run unit-tests?
-dub build --nodeps  --cache=local -f -b releaseXDG
+dub build --nodeps --cache=local -f -b releaseXDG
 dub remove-path "$DUB_DEPS_LOCAL_PATH"
 # Needed?
 #dub clean-caches
@@ -82,6 +83,11 @@ install -Dm 0644 data/desktop/com.lixgame.Lix.desktop %{buildroot}%{_datadir}/ap
 %{_datadir}/lix/music
 
 %changelog
+* Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.20-0.1
+- upgrade to 0.10.20
+- upgrade local (offline) dub dependencies (allegro 4.0.4+5.2.0 → 4.0.6+5.2.0)
+- make music subpackage architecture agnostic (noarch)
+
 * Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.12-0.1
 - upgrade to 0.10.12
 - use updated lix-music 1.1 package (still using the same URL - see discussion in https://github.com/SimonN/LixD/issues/457)
