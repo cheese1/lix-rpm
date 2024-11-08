@@ -1,8 +1,8 @@
 %global forgeurl https://github.com/SimonN/LixD/
 
 Name:           lix
-Version:        0.10.20
-Release:        0.2%{?dist}
+Version:        0.10.26
+Release:        1%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
 # CC0-1.0 for everything, expect "Bitstream Vera and Public Domain" for dejavu-sans fonts
@@ -87,6 +87,9 @@ install -Dm 0644 data/desktop/com.lixgame.Lix.desktop %{buildroot}%{_datadir}/ap
 %{_datadir}/lix/music
 
 %changelog
+* Fri Nov 08 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.26-1
+- upgrade to 0.10.26
+
 * Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.20-0.2
 - exclude some duplicated files in RPM package
 
