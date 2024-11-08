@@ -2,7 +2,7 @@
 
 Name:           lix
 Version:        0.10.20
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        A single and multiplaer puzzle game inspired by Lemmings
 Group:          Games and Entertainment
 # CC0-1.0 for everything, expect "Bitstream Vera and Public Domain" for dejavu-sans fonts
@@ -78,11 +78,18 @@ install -Dm 0644 data/desktop/com.lixgame.Lix.desktop %{buildroot}%{_datadir}/ap
 %{_datadir}/applications/com.lixgame.Lix.desktop
 %{_datadir}/metainfo/com.lixgame.Lix-metainfo.xml
 %{_mandir}/man6/lix.6*
+# Already installed in other directories, no duplication needed
+%exclude %{_datadir}/lix/data/images/lix_logo.svg
+%exclude %{_datadir}/lix/data/desktop/com.lixgame.Lix.metainfo.xml
+%exclude %{_datadir}/lix/data/desktop/com.lixgame.Lix.desktop
 
 %files music
 %{_datadir}/lix/music
 
 %changelog
+* Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.20-0.2
+- exclude some duplicated files in RPM package
+
 * Mon Feb 19 2024 Marcin Zajaczkowski <mszpak ATT wp DOTT pl> 0.10.20-0.1
 - upgrade to 0.10.20
 - upgrade local (offline) dub dependencies (allegro 4.0.4+5.2.0 → 4.0.6+5.2.0)
