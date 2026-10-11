@@ -12,10 +12,11 @@ URL:            https://www.lixgame.com/
 # Add -i -v for detailed information
 %forgemeta
 Source:         %{forgesource}
-# TODO: Provide instruction how to locally build that "deps cache"
+
 Source1:        lix-dub-deps-local-%{version}.tar.xz
 # TODO: In fact version 1.1 - add explicit versioning, if provided upstream - https://github.com/SimonN/LixD/issues/457
 Source2:        https://www.lixgame.com/dow/lix-music.zip
+Source3:        vendor.sh
 BuildRequires:  ldc
 BuildRequires:  dub
 BuildRequires:  pkgconf-pkg-config
