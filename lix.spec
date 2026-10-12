@@ -12,11 +12,11 @@ URL:            https://www.lixgame.com/
 # Add -i -v for detailed information
 %forgemeta
 Source:         %{forgesource}
-
 Source1:        lix-dub-deps-local-%{version}.tar.xz
 # TODO: In fact version 1.1 - add explicit versioning, if provided upstream - https://github.com/SimonN/LixD/issues/457
 Source2:        https://www.lixgame.com/dow/lix-music.zip
 Source3:        vendor.sh
+
 BuildRequires:  ldc
 BuildRequires:  dub
 BuildRequires:  pkgconf-pkg-config
@@ -29,8 +29,10 @@ BuildRequires:  allegro5-addon-ttf-devel
 # dub uses git client to determine version of dependencies in local cache
 BuildRequires:  git
 
-Recommends:     lix-music = %{version}-%{release}
 Requires:       dejavu-sans-fonts
+
+Recommends:     lix-music = %{version}-%{release}
+
 %description
 Lix is a puzzle game inspired by Lemmings. Lix is free and open source.
 Assign skills to guide the lix through over 700 singleplayer puzzles.
